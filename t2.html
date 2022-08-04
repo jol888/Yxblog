@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <form action="/down" method="post">
+        <button type="submit" onclick="return chk()">Submit</button>
+        <input type="text" hidden name="json" id="up">
+        </form>
+        <catalog id="cat">
+            <CATALOG/>
+        </catalog>
+        <script>
+            document.onload=init()
+            function init()
+            {
+                s=document.getElementById('cat').innerText.replace(/,]/g,']').replace(/'/g,'"');
+                document.getElementById('cat').innerText='';
+                bs=JSON.parse(s);
+
+                var {ret}=bs;
+                ret.forEach(element => {
+                    var div = document.createElement("div");
+                    var check=document.createElement("input");
+                    check.checked='1';
+                    check.className='zj';
+                    check.value=element.link;
+                    check.name=element.title;
+                    check.type='checkbox';
+                    var text=document.createElement("span");
+                    text.innerText=element.title;
+                    div.appendChild(text)
+                    div.appendChild(check)
+                    div.appendChild(document.createElement("br"))
+                    document.getElementById('cat').appendChild(div);
+                });
+
+            }
+
+            function chk(){ 
+                obj=document.getElementsByClassName('zj');
+                var ret={base:{base:bs.base,name:bs.name},ret:[]}; 
+                for(var i=0; i<obj.length; i++){ 
+                    if(obj[i].checked) ret.ret.push({link:obj[i].value,title:obj[i].name});
+                    console.log(obj[i].value);
+                }
+                console.log(ret);
+                document.getElementById('up').value=window.btoa(encodeURI(JSON.stringify(ret)));
+            }
+        </script>
+    </body>
+</html>

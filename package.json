@@ -1,0 +1,25 @@
+{
+  "name": "test-project",
+  "version": "1.0.0",
+  "description": "Parse/Downliad",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "start": "npm run dev",
+    "unit": "jest --config test/unit/jest.conf.js --coverage",
+    "test": "npm run unit",
+    "lint": "eslint --ext .js,.vue src test/unit",
+    "build": "node build/build.js"
+  },
+  "devDependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "pkg": "^5.8.0"
+  },
+  "dependencies": {
+    "express": "^4.18.1",
+    "iconv": "^3.0.1",
+    "iconv-lite": "^0.6.3"
+  }
+}
+
